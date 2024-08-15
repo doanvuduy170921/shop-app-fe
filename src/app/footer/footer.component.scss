@@ -1,0 +1,32 @@
+.footer {
+  background-color: #13172A; /* Màu nền tối cho footer */
+  padding: 20px 0;
+  color: #ffffff; /* Màu chữ trắng cho dễ đọc */
+}
+
+.footer-description {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.footer-description p {
+  margin: 0;
+}
+
+.footer-description .text-end {
+  text-align: right;
+}
+
+@media (max-width: 768px) {
+  .footer-description {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-description .text-end {
+    text-align: center;
+    margin-top: 10px;
+  }
+}
