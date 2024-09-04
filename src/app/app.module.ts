@@ -39,8 +39,8 @@ import {FormsModule} from "@angular/forms";
  // DetailProductComponent
    // OrderConfirmComponent
   //  OrderComponent
-   // LoginComponent
-    RegisterComponent
+    LoginComponent
+   // RegisterComponent
   ]
 })
 export class AppModule {
