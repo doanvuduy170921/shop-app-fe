@@ -33,8 +33,7 @@
         <div class="form-group">
           <select class="form-control access-right">
             <option selected disabled>Quyền đăng nhập</option>
-            <option>Người dùng</option>
-            <option>Quản trị viên</option>
+            <option *ngFor="let role of roles" [value]="role.id">{{role.name}}</option>
           </select>
         </div>
 
