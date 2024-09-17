@@ -12,7 +12,14 @@ export class ProductService {
   constructor(private http: HttpClient) {}
 
   getProducts(keyword:string,category_id:number, page: number, limit: number): Observable<any> {
-    return this.http.get(`${environment.apiBaseUrl}/products?keyword=${keyword}&category_id=${category_id}&page=${page}&limit=${limit}`);
+    const params = {
+      keyword: keyword || '',
+      category_id: category_id.toString(), // Truyền categoryId dưới dạng chuỗi
+      page: page.toString(),
+      limit: limit.toString()
+    };
+
+    return this.http.get(`${environment.apiBaseUrl}/products/getAllProduct?keyword=${keyword}&category_id=${category_id}&page=${page}&limit=${limit}`);
   }
 
 

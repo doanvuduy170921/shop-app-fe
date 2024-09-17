@@ -13,8 +13,11 @@ import { LoginComponent } from './component/login/login.component';
 
 import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
 import { RegisterComponent } from './component/register/register.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {TokenInterceptor} from "./interceptors/token.interceptor";
+import {PaginatorModule} from "primeng/paginator";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+
 
 @NgModule({
   declarations: [
@@ -32,7 +35,9 @@ import {TokenInterceptor} from "./interceptors/token.interceptor";
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    PaginatorModule,
+    BrowserAnimationsModule
   ],
   providers: [
     {
