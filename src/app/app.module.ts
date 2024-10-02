@@ -14,9 +14,15 @@ import { LoginComponent } from './component/login/login.component';
 import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
 import { RegisterComponent } from './component/register/register.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {TokenInterceptor} from "./interceptors/token.interceptor";
+import {authInterceptor, TokenInterceptor} from "./interceptors/token.interceptor";
 import {PaginatorModule} from "primeng/paginator";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { AppComponent } from './app/app.component';
+import {AuthService} from "./services/AuthService";
+import {TableModule} from "primeng/table";
+import { CartComponent } from './component/cart/cart.component';
+import {RatingModule} from "primeng/rating";
+import {ButtonModule} from "primeng/button";
 
 
 @NgModule({
@@ -28,8 +34,10 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
      OrderComponent,
      OrderConfirmComponent,
      LoginComponent,
-
-     RegisterComponent
+      AppComponent,
+     RegisterComponent,
+      AppComponent,
+      CartComponent
   ],
   imports: [
     BrowserModule,
@@ -37,22 +45,24 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     HttpClientModule,
     FormsModule,
     PaginatorModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    TableModule,
+    RatingModule,
+    ButtonModule
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true
-    }
+    authInterceptor,
+    AuthService
   ],
-  bootstrap: [//DetailProductComponent,
-   HomeComponent,
- // DetailProductComponent
-   // OrderConfirmComponent
-  //  OrderComponent
-   // LoginComponent
-   // RegisterComponent
+  bootstrap: [
+    AppComponent
+    // DetailProductComponent,
+    // HomeComponent,
+    // DetailProductComponent
+    // OrderConfirmComponent
+    // OrderComponent
+    // LoginComponent
+    // RegisterComponent
   ]
 })
 export class AppModule {

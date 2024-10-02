@@ -3,7 +3,7 @@ import {ProductService} from "../../services/product.service";
 import {Product} from "../../models/product";
 import {environment} from "../../environments/environment";
 import {CategoryService} from "../../services/category.service";
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -15,13 +15,13 @@ export class HomeComponent implements OnInit {
   totalPage: number = 0;
   currentPage: number = 0;
   limit: number = 12; // Giới hạn số sản phẩm mỗi trang
-
+  page= 0;
   categories: any[] = [];
   selectedCategoryId: number = 0;
 
   keyword: string = "";
 
-  constructor(private productService: ProductService, private categoryService: CategoryService) { }
+  constructor(private productService: ProductService, private categoryService: CategoryService,private router: Router) { }
 
   ngOnInit(): void {
     this.loadProducts(this.keyword,this.selectedCategoryId,this.currentPage, this.limit);
@@ -33,14 +33,17 @@ export class HomeComponent implements OnInit {
     this.productService.getProducts(keyword, category_id,page, limit).subscribe(response => {
       this.products = response.products.map((product: Product) => {
         // Thêm đường dẫn đầy đủ cho hình ảnh
-        product.thumbnail = `${environment.apiBaseUrl}/products/images/${product.thumbnail}`;
+        console.log("before", product.thumbnail)
+        product.thumbnail = this.productService.getImageUrl(product.thumbnail);
         return product;
       });
+      console.log(this.products )
       this.totalPage = response.totalPage;
     }, error => {
       console.log('Error fetching products:', error);
     });
   }
+
   loadCategories(){
     this.categoryService.getCategories().subscribe(response => {
       this.categories = response;
@@ -67,4 +70,11 @@ export class HomeComponent implements OnInit {
     console.log(this.selectedCategoryId)
     this.loadProducts(this.keyword, this.selectedCategoryId, this.currentPage, this.limit);
   }
+
+  onProductClick(productId:number) {
+    console.log(productId)
+    this.router.navigate(['/product/detail',productId]);
+  }
+
+
 }

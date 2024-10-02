@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrderConfirmComponent implements OnInit {
 
-  constructor() { }
+  products: any[] = [];
 
-  ngOnInit(): void {
+  ngOnInit() {
+    // Lấy danh sách sản phẩm từ localStorage
+    const orderedProducts = localStorage.getItem('orderedProducts');
+    this.products = orderedProducts ? JSON.parse(orderedProducts) : [];
   }
-
 }

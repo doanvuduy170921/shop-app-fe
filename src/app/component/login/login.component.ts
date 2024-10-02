@@ -7,6 +7,7 @@ import {NgForm} from "@angular/forms";
 import {TokenService} from "../../services/token.service";
 import {LoginResponse} from "../../responses/user/login.response";
 import {RoleService} from "../../services/role.service";
+import {AuthService} from "../../services/AuthService";
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,8 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router,
               private userService: UserService,
               private tokenService: TokenService,
-              private roleService: RoleService
+              private roleService: RoleService,
+              private isLogin: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -39,7 +41,6 @@ export class LoginComponent implements OnInit {
     const message = `phone: ${this.phoneNumber}`+
                     `password: ${this.password}`
     //alert(message);
-    debugger
     const loginDto : LoginDto ={
       "phoneNumber":this.phoneNumber,
       "password":this.password,
@@ -47,16 +48,15 @@ export class LoginComponent implements OnInit {
     console.log(loginDto)
     this.userService.login(loginDto).subscribe({
         next : (response:LoginResponse) => {
-          debugger
           const {token} = response;
           this.tokenService.setToken(token);
+        this.isLogin.isAuthenticatedSubject.next(true);
+          this.router.navigate(['/home']);
           console.log(response)
         },
         complete:() =>{
-          debugger
         },
         error:(error:any) => {
-          debugger
           alert(`Can not login, error : ${ error.error}`);
         }
       }

@@ -23,6 +23,13 @@
           <input type="text" class="form-control" id="phone">
         </div>
 
+        <div class="mb-3">
+          <label for="payment-method" class="form-label">Phương thức thanh toán</label>
+          <select class="form-control" id="payment-method" [(ngModel)]="selectedPaymentMethod" name="paymentMethod">
+            <option *ngFor="let method of paymentMethods" [value]="method">{{ method }}</option>
+          </select>
+        </div>
+
       </form>
     </div>
     <div class="col-md-6">
@@ -37,49 +44,25 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
+        <tr *ngFor="let product of products">
           <td>
             <div class="product-info">
-              <img src="https://images.pexels.com/photos/38568/apple-imac-ipad-workplace-38568.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Product Image" class="product-image">
-              <span class="product-name">Apple</span>
+              <img [src]="product.thumbnail" alt="Product Image" class="product-image">
+              <span class="product-name">{{ product.productName }}</span>
             </div>
           </td>
-          <td>3</td>
-          <td>$200</td>
-          <td>$600</td>
-        </tr>
-
-        <tr>
-          <td>
-            <div class="product-info">
-              <img src="https://images.pexels.com/photos/38568/apple-imac-ipad-workplace-38568.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Product Image" class="product-image">
-              <span class="product-name">Apple</span>
-            </div>
-          </td>
-          <td>3</td>
-          <td>$200</td>
-          <td>$600</td>
-        </tr>
-
-        <tr>
-          <td>
-            <div class="product-info">
-              <img src="https://images.pexels.com/photos/38568/apple-imac-ipad-workplace-38568.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Product Image" class="product-image">
-              <span class="product-name">Apple</span>
-            </div>
-          </td>
-          <td>3</td>
-          <td>$200</td>
-          <td>$600</td>
+          <td>{{ product.quantity }}</td>
+          <td>{{ product.price | currency:'USD':'symbol':'1.0-0' }}</td>
+          <td>{{ (product.price * product.quantity) | currency:'USD':'symbol':'1.0-0' }}</td>
         </tr>
         </tbody>
       </table>
 
       <div class="text-start mt-3">
-        <h4 class="header-text text-end">Tổng giá : $1800</h4>
+        <h4 class="header-text text-end">Tổng thanh toán : {{ getTotalPrice() | currency:'USD':'symbol':'1.0-0' }}</h4>
       </div>
       <div class="mt3">
-        <h4 class="product-header">Nhập coupon</h4>
+        <h4 class="product-header">Nhập coupon giảm giá</h4>
         <div class="input-group">
           <input type="text" class="form-control" placeholder="Nhập coupon">
           <button class="btn btn-gradient" type="button">Áp dụng</button>
@@ -87,12 +70,9 @@
       </div>
 
       <div class="text-start mt-3">
-        <button class="btn btn-gradient" type="button">Đặt hàng</button>
+        <button class="btn btn-gradient" type="button" (click)="placeOrder()" >Đặt hàng</button>
       </div>
-
     </div>
-
   </div>
-
 </div>
 <app-footer></app-footer>
