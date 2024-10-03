@@ -10,17 +10,17 @@
       <form>
         <div class="mb-3">
           <label for="name" class="form-label">Họ và tên</label>
-          <input type="text" class="form-control" id="name">
+          <input type="text" class="form-control" id="name" [(ngModel)]="userData.fullname" name="fullname">
         </div>
 
         <div class="mb-3">
-          <label for="email" class="form-label">Email</label>
-          <input type="email" class="form-control" id="email">
+          <label for="address" class="form-label">Địa chỉ </label>
+          <input type="text" class="form-control" id="address" [(ngModel)]="userData.address" name="address">
         </div>
 
         <div class="mb-3">
           <label for="phone" class="form-label">Số điện thoại</label>
-          <input type="text" class="form-control" id="phone">
+          <input type="text" class="form-control" id="phone" [(ngModel)]="userData.phone_number" name="phone_number">
         </div>
 
         <div class="mb-3">
@@ -70,7 +70,7 @@
       </div>
 
       <div class="text-start mt-3">
-        <button class="btn btn-gradient" type="button" (click)="placeOrder()" >Đặt hàng</button>
+        <button class="btn btn-gradient" type="button"  >Đặt hàng</button>
       </div>
     </div>
   </div>

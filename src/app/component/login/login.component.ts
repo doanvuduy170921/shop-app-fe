@@ -47,9 +47,12 @@ export class LoginComponent implements OnInit {
     }
     console.log(loginDto)
     this.userService.login(loginDto).subscribe({
-        next : (response:LoginResponse) => {
-          const {token} = response;
+        next : (response:any) => {
+          console.log(response)
+          const token = response.token;
+          const user = response.user;
           this.tokenService.setToken(token);
+          this.tokenService.setUser(JSON.stringify(user));
         this.isLogin.isAuthenticatedSubject.next(true);
           this.router.navigate(['/home']);
           console.log(response)

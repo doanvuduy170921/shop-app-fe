@@ -13,6 +13,12 @@ export class TokenService {
   setToken(token:string):void {
     localStorage.setItem(this.TOKEN_KEY, token);
   }
+  getUser(){
+    return localStorage.getItem('user');
+  }
+  setUser(user:any):void {
+    localStorage.setItem('user', user);
+  }
   removeToken():void {
     localStorage.removeItem(this.TOKEN_KEY);
   }

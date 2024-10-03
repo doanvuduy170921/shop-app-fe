@@ -44,7 +44,7 @@ export class CartComponent implements OnInit {
     console.log('Selected products:', this.selectedProducts);
   }
 
- /* placeOrder() {
+  placeOrder() {
     if (this.selectedProducts.length > 0) {
       // Lưu sản phẩm đã chọn vào local storage hoặc service để chia sẻ giữa các component
       localStorage.setItem('selectedProducts', JSON.stringify(this.selectedProducts));
@@ -52,5 +52,5 @@ export class CartComponent implements OnInit {
     } else {
       alert('Vui lòng chọn ít nhất một sản phẩm để đặt hàng.');
     }
-  }*/
+  }
 }
