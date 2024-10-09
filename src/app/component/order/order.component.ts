@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {PaymentMethodService} from "../../services/paymentMethod.service";
 import {Router} from "@angular/router";
 import {TokenService} from "../../services/token.service";
+import {Observable} from "rxjs";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-order',
@@ -18,7 +20,7 @@ export class OrderComponent implements OnInit {
   paymentMethods: string[] = [];
   products: any[] = [];
   selectedPaymentMethod: string = '';
-  constructor(private payment:PaymentMethodService,private router:Router,private token:TokenService) {
+  constructor(private payment:PaymentMethodService,private router:Router,private token:TokenService,private http:HttpClient) {
   }
   ngOnInit() {
     // Lấy sản phẩm đã chọn từ local storage
@@ -49,5 +51,30 @@ export class OrderComponent implements OnInit {
         phone_number: userDataObj.phone_number || ''
       };
     }
+  }
+
+  placeOrder() {
+    const ids = this.products.map(product => product.id);  // Lấy ID của các sản phẩm
+    const orderReq = {
+      address: this.userData.address,
+      totalMoney: this.getTotalPrice(),
+      shippingMethod: 'Standard',
+      shippingAddress: this.userData.address,
+      shippingDate: new Date(),  // Ngày vận chuyển hiện tại
+      paymentMethod: this.selectedPaymentMethod
+    };
+
+    this.createOrder(orderReq, ids).subscribe(response => {
+      console.log('Order placed successfully:', response);
+      this.router.navigate(['/orders-confirm'], { state: { order: orderReq } });
+    }, error => {
+      console.error('Error placing order:', error);
+    });
+  }
+
+  // Hàm gửi request tới API backend
+  createOrder(orderReq: any, ids: number[]): Observable<any> {
+    const apiUrl = `http://localhost:8088/api/v1/orders/${ids.join(',')}`;
+    return this.http.post(apiUrl, orderReq);  // Gửi POST request
   }
 }

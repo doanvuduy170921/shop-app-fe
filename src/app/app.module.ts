@@ -23,6 +23,7 @@ import {TableModule} from "primeng/table";
 import { CartComponent } from './component/cart/cart.component';
 import {RatingModule} from "primeng/rating";
 import {ButtonModule} from "primeng/button";
+import { UserInfoComponent } from './component/user-info/user-info.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import {ButtonModule} from "primeng/button";
       AppComponent,
      RegisterComponent,
       AppComponent,
-      CartComponent
+      CartComponent,
+      UserInfoComponent
   ],
   imports: [
     BrowserModule,

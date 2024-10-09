@@ -1,21 +1,19 @@
 <p-table [value]="products" [(selection)]="selectedProducts">
   <ng-template pTemplate="caption">
     <div class="p-d-flex p-ai-center p-jc-between">
-      Products
-      <p-button icon="pi pi-refresh" (click)="getCart()"></p-button>
+      Giỏ hàng của bạn
     </div>
   </ng-template>
-
   <ng-template pTemplate="header">
     <tr>
       <th style="width: 4rem">
         <p-tableHeaderCheckbox (click)="selectedAll($event)"></p-tableHeaderCheckbox>
       </th>
-      <th>Thumbnail</th>
-      <th>Name</th>
-      <th>Price</th>
-      <th>Quantity</th>
-      <th>Total Money</th>
+      <th>Hình ảnh</th>
+      <th>Tên sản phẩm</th>
+      <th>Giá</th>
+      <th>Số lượng</th>
+      <th>Tổng giá</th>
 
     </tr>
   </ng-template>
@@ -27,9 +25,9 @@
       </td>
       <td><img style="width:100px;height:100px" [src]="product.thumbnail"></td>
       <td>{{product.productName}}</td>
-      <td> {{ product.price | currency:'USD':'symbol':'1.0-0' }}</td>
+      <td> {{ product.price}}$</td>
       <td>{{product.quantity}}</td>
-      <td>{{handlerTotal(product) | currency : 'USD':'symbol':'1.0-0'}}</td>
+      <td>{{handlerTotal(product) }}$</td>
 
     </tr>
   </ng-template>

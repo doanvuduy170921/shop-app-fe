@@ -1,17 +1,21 @@
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {Observable, BehaviorSubject, tap} from "rxjs";
-import {Injectable} from "@angular/core";
-import {environment} from "../environments/environment";
-import {ProductResponse} from "../responses/product/product.response";
-
+import { Injectable } from "@angular/core";
+import { environment } from "../environments/environment";
+import { ProductResponse } from "../responses/product/product.response";
 
 @Injectable({
   providedIn: 'root'
 })
-export class CartService{
-  private apiUrl =`${environment.apiBaseUrl}/carts/user-cart`;
-  constructor(private http:HttpClient) {}
-  private cartSubject = new BehaviorSubject<any[]>([]);
+export class CartService {
+  private apiUrl = `${environment.apiBaseUrl}/carts/user-cart`;
+  private cartSubject = new BehaviorSubject<ProductResponse[]>([]);
+  cart$ = this.cartSubject.asObservable();
+
+  constructor(private http: HttpClient) {
+    this.updateCartState();
+  }
+
   getListCartByUser(): Observable<{ listCart: ProductResponse[] }> {
     return this.http.get<{ listCart: ProductResponse[] }>(this.apiUrl);
   }
@@ -22,16 +26,13 @@ export class CartService{
       quantity: quantity
     };
     return this.http.post(`${environment.apiBaseUrl}/carts/add-to-cart`, requestBody).pipe(
-      // Sau khi thêm sản phẩm vào giỏ hàng thành công, cập nhật BehaviorSubject
-      tap((response: any) => {
-        this.updateCartState();
-      })
+      tap(() => this.updateCartState())
     );
   }
+
   updateCartState(): void {
-    this.http.get<any[]>(`${this.apiUrl}/user-cart`).subscribe(cart => {
-      this.cartSubject.next(cart);  // Cập nhật giỏ hàng trong BehaviorSubject
+    this.getListCartByUser().subscribe(response => {
+      this.cartSubject.next(response.listCart);
     });
   }
-
 }

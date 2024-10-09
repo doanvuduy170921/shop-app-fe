@@ -4,36 +4,74 @@
     <h1 class="text-center">Đây là đơn hàng của bạn</h1>
     <p>Cảm ơn bạn đã đặt hàng! Dưới đây là thông tin chi tiết về đơn hàng của bạn</p>
   </div>
-    <div class="row">
-      <table>
-        <thead>
-        <tr >
-          <th scope="col" class="text-start">Sản phẩm</th>
-          <th scope="col">Số lượng</th>
-          <th scope="col">Đơn giá</th>
-          <th scope="col">Tổng giá</th>
+  <div class="row">
+    <p-table [value]="orders" dataKey="order_code" [expandedRowKeys]="expandedRows" (onRowExpand)="onRowExpand($event)" (onRowCollapse)="onRowCollapse($event)" [tableStyle]="{'min-width': '60rem'}">
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 5rem"></th>
+          <th pSortableColumn="order_code">Mã đơn hàng <p-sortIcon field="orderCode"></p-sortIcon></th>
+          <th pSortableColumn="order_date">Ngày đặt hàng <p-sortIcon field="status"></p-sortIcon></th>
+          <th pSortableColumn="shipping_date">Ngày giao hàng(dự kiến) <p-sortIcon field="shippingDate"></p-sortIcon></th>
+          <th pSortableColumn="address">Địa chỉ <p-sortIcon field="address"></p-sortIcon></th>
+          <th pSortableColumn="total_money">Tổng giá <p-sortIcon field="totalMoney"></p-sortIcon></th>
+
         </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let product of products">
+      </ng-template>
+      <ng-template pTemplate="body" let-order let-expanded="expanded">
+        <tr>
           <td>
-            <div class="product-info">
-              <img [src]="product.thumbnail" alt="Product Image" class="product-image">
-              <span class="product-name">{{ product.productName }}</span>
+            <button type="button" pButton pRipple [pRowToggler]="order" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+          </td>
+          <td>{{order.order_code}}</td>
+          <td>{{order.order_date|date:'dd/MM/yyyy'}}</td>
+          <td>{{order.shipping_date| date:'dd/MM/yyyy'}}</td>
+          <td>{{order.address}}</td>
+          <td>{{order.total_money | currency:'USD'}}</td>
+
+
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="rowexpansion" let-order>
+        <tr>
+          <td colspan="6">
+            <div class="p-3">
+              <p-table [value]="order.orderDetails" dataKey="id">
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th pSortableColumn="id">Id <p-sortIcon field="id"></p-sortIcon></th>
+                    <th pSortableColumn="product.name">Sản phẩm <p-sortIcon field="product.name"></p-sortIcon></th>
+                    <th pSortableColumn="quantity">Số lượng <p-sortIcon field="quantity"></p-sortIcon></th>
+                    <th pSortableColumn="price">Giá <p-sortIcon field="price"></p-sortIcon></th>
+                    <th pSortableColumn="totalMoney">Tổng tiền <p-sortIcon field="totalMoney"></p-sortIcon></th>
+                    <th style="width: 4rem"></th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-detail>
+                  <tr>
+                    <td>{{detail.id}}</td>
+                    <td>{{detail.product.name}}</td>
+                    <td>{{detail.quantity}}</td>
+                    <td>{{detail.price | currency:'USD'}}</td>
+                    <td>{{detail.totalMoney | currency:'USD'}}</td>
+                    <td><p-button type="button" icon="pi pi-pencil"></p-button></td>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                  <tr>
+                    <td colspan="6">Chưa có chi tiết đơn hàng nào.</td>
+                  </tr>
+                </ng-template>
+              </p-table>
             </div>
           </td>
-          <td>{{ product.quantity }}</td>
-          <td>{{ product.price | currency:'USD':'symbol':'1.0-0' }}</td>
-          <td>{{ (product.price * product.quantity) | currency:'USD':'symbol':'1.0-0' }}</td>
         </tr>
-        </tbody>
-      </table>
+      </ng-template>
+    </p-table>
 
-      <div class="text-center mt-3">
-        <button class="btn btn-gradient" type="button" routerLink="/home">Tiếp tục mua sắm</button>
-      </div>
-
+    <div class="text-center mt-3">
+      <button class="btn btn-gradient" type="button" routerLink="/home">Tiếp tục mua sắm</button>
     </div>
   </div>
+</div>
 
 <app-footer></app-footer>

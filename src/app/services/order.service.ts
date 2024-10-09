@@ -3,6 +3,7 @@ import {environment} from "../environments/environment";
 import {Observable} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Order} from "../models/order";
+import {OrderDto} from "../dtos/order/OrderDto";
 
 @Injectable({
   providedIn: 'root'
@@ -15,5 +16,11 @@ export class OrderService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     return this.http.post<Order>(url, orderDto, { headers });
+  }
+
+  getAllOrderByUser():Observable<OrderDto[]>{
+    const url = `${environment.apiBaseUrl}/orders/get-all-by-user`;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.get<OrderDto[]>(url, { headers });
   }
 }

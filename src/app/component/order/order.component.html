@@ -9,8 +9,8 @@
       <h2 class="product-header">Thông tin người nhận</h2>
       <form>
         <div class="mb-3">
-          <label for="name" class="form-label">Họ và tên</label>
-          <input type="text" class="form-control" id="name" [(ngModel)]="userData.fullname" name="fullname">
+          <label for="fullname" class="form-label">Họ và tên</label>
+          <input type="text" class="form-control" id="fullname" [(ngModel)]="userData.fullname" name="fullname">
         </div>
 
         <div class="mb-3">
@@ -70,7 +70,7 @@
       </div>
 
       <div class="text-start mt-3">
-        <button class="btn btn-gradient" type="button"  >Đặt hàng</button>
+        <button class="btn btn-gradient" type="button" (click)="placeOrder()" >Đặt hàng</button>
       </div>
     </div>
   </div>

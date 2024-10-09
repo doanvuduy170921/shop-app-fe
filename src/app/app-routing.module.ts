@@ -7,6 +7,7 @@ import {DetailProductComponent} from "./component/detail-product/detail-product.
 import {OrderComponent} from "./component/order/order.component";
 import {OrderConfirmComponent} from "./component/order-confirm/order-confirm.component";
 import {CartComponent} from "./component/cart/cart.component";
+import {UserInfoComponent} from "./component/user-info/user-info.component";
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path: 'product/detail/:id',component:DetailProductComponent},
   {path:'orders',component:OrderComponent},
   {path:'cart',component:CartComponent},
+  {path:'user-info',component:UserInfoComponent},
   {path:'orders-confirm',component:OrderConfirmComponent}
 ];
 

@@ -77,4 +77,9 @@ export class HomeComponent implements OnInit {
   }
 
 
+  clearSearch() {
+    this.keyword = '';
+    this.currentPage = 0;
+    this.loadProducts(this.keyword, this.selectedCategoryId, this.currentPage, this.limit);
+  }
 }
