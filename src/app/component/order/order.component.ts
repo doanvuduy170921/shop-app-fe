@@ -74,7 +74,7 @@ export class OrderComponent implements OnInit {
 
   // Hàm gửi request tới API backend
   createOrder(orderReq: any, ids: number[]): Observable<any> {
-    const apiUrl = `http://localhost:8088/api/v1/orders/${ids.join(',')}`;
+    const apiUrl = `http://localhost:8080/api/v1/orders/${ids.join(',')}`;
     return this.http.post(apiUrl, orderReq);  // Gửi POST request
   }
 }

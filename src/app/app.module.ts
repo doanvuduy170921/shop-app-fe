@@ -24,6 +24,16 @@ import { CartComponent } from './component/cart/cart.component';
 import {RatingModule} from "primeng/rating";
 import {ButtonModule} from "primeng/button";
 import { UserInfoComponent } from './component/user-info/user-info.component';
+import { AdminComponent } from './admin-page/admin/admin.component';
+import {NgOptimizedImage} from "@angular/common";
+import { AdminSidebarComponent } from './admin-page/admin-sidebar/admin-sidebar.component';
+import { AdminNavbarComponent } from './admin-page/admin-navbar/admin-navbar.component';
+import { AdminContentComponent } from './admin-page/admin-content/admin-content.component';
+import { AdminFooterComponent } from './admin-page/admin-footer/admin-footer.component';
+import { ManageProductComponent } from './admin-page/manage-product/manage-product.component';
+
+
+
 
 
 @NgModule({
@@ -39,7 +49,17 @@ import { UserInfoComponent } from './component/user-info/user-info.component';
      RegisterComponent,
       AppComponent,
       CartComponent,
-      UserInfoComponent
+      UserInfoComponent,
+      AdminComponent,
+      AdminSidebarComponent,
+      AdminNavbarComponent,
+      AdminContentComponent,
+      AdminFooterComponent,
+      ManageProductComponent
+
+
+
+
   ],
   imports: [
     BrowserModule,
@@ -50,7 +70,8 @@ import { UserInfoComponent } from './component/user-info/user-info.component';
     BrowserAnimationsModule,
     TableModule,
     RatingModule,
-    ButtonModule
+    ButtonModule,
+    NgOptimizedImage
   ],
   providers: [
     authInterceptor,

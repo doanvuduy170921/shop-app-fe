@@ -8,6 +8,13 @@ import {OrderComponent} from "./component/order/order.component";
 import {OrderConfirmComponent} from "./component/order-confirm/order-confirm.component";
 import {CartComponent} from "./component/cart/cart.component";
 import {UserInfoComponent} from "./component/user-info/user-info.component";
+import {AdminComponent} from "./admin-page/admin/admin.component";
+import {AdminNavbarComponent} from "./admin-page/admin-navbar/admin-navbar.component";
+import {ManageProductComponent} from "./admin-page/manage-product/manage-product.component";
+
+
+
+
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -18,7 +25,17 @@ const routes: Routes = [
   {path:'orders',component:OrderComponent},
   {path:'cart',component:CartComponent},
   {path:'user-info',component:UserInfoComponent},
+
+  {path:'admin',component:AdminComponent},
+
+  {path:'admin/mn-product',component:ManageProductComponent},
+
+
+
   {path:'orders-confirm',component:OrderConfirmComponent}
+
+
+
 ];
 
 @NgModule({

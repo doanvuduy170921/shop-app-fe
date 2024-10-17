@@ -9,7 +9,7 @@
   </div>
   <!--Đoạn này có 1 ô search box nằm bên trái, combobox nằm bên phải-->
   <div class="search-box">
-    <input type="text" class="form-control search-input" placeholder="Tìm sản phẩm . . ." [(ngModel)]="keyword" (change)="searchProduct()">
+    <input type="text" class="form-control search-input" placeholder="Tìm sản phẩm . . ." [(ngModel)]="keyword" (input)="searchProduct()">
     <div class="input-group-append">
       <button *ngIf="keyword" class="btn btn-outline-secondary" (click)="clearSearch()">X</button>
     </div>
@@ -18,13 +18,13 @@
       <option  [value]="0" >Tất cả</option>
       <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
     </select>
-    <button class="btn btn-primary ml-2 search-btn" (click)="searchProduct()">Tìm kiếm</button>
+<!--    <button class="btn btn-primary ml-2 search-btn" (click)="searchProduct()">Tìm kiếm</button>-->
   </div>
 <br>
   <div class="row">
     <div *ngFor="let product of products" class="col-lg-4 col-md-6">
       <div class="product-items" (click)="onProductClick(product.id)">
-        <img style="width:370px;height:260px" src="{{product.thumbnail}}" alt="Product Image" class="product-image">
+        <img style="width:207px;height:207px" src="{{product.thumbnail}}" alt="Product Image" class="product-image">
         <h3 class="product-name">{{ product.name }}</h3>
         <p class="product-description">{{ product.description }}</p>
         <p class="product-warranty">Bảo hành : 12 tháng</p>
